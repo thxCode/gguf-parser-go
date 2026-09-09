@@ -22,7 +22,7 @@ permissions:
 # single normal comment kills a running review, and you see "two runs, one
 # cancelled" in the Actions tab.
 #
-# Fix: matching events (PR events + /open-code-review comments) share a per-PR
+# Fix: matching events (PR events + /gpustack-codereview comments) share a per-PR
 # group so a new review cancels any stale one for the same PR. Non-matching
 # comments land in a unique noop-<run_id> group that can never collide with a
 # real review, so they are skipped instantly without disrupting anything.
@@ -41,8 +41,8 @@ concurrency:
             || github.event.comment.author_association == 'COLLABORATOR'
           )
           && (
-            startsWith(github.event.comment.body, '/open-code-review')
-            || startsWith(github.event.comment.body, '@open-code-review')
+            startsWith(github.event.comment.body, '/gpustack-codereview')
+            || startsWith(github.event.comment.body, '@gpustack-codereview')
           )
         )
       )
@@ -79,8 +79,8 @@ jobs:
           || github.event.comment.author_association == 'COLLABORATOR'
         )
         && (
-          startsWith(github.event.comment.body, '/open-code-review')
-          || startsWith(github.event.comment.body, '@open-code-review')
+          startsWith(github.event.comment.body, '/gpustack-codereview')
+          || startsWith(github.event.comment.body, '@gpustack-codereview')
         )
       )
     uses: gpustack/.github/.github/workflows/code-review.yml@main
